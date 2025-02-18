@@ -1,0 +1,50 @@
+[
+    {
+        "data": "Initializing MPU6050..."
+    },
+    {
+        "data": "MPU6050 connection successful"
+    },
+    {
+        "data": "Accel X: -0.21 | Accel Y: -9.02 | Accel Z: 3.17"
+    },
+    {
+        "data": "Gyro X: -0.04 | Gyro Y: -0.16 | Gyro Z: 0.07"
+    },
+    {
+        "data": "--------------------------------------"
+    },
+    {
+        "data": "Accel X: -0.21 | Accel Y: -9.24 | Accel Z: 3.32"
+    },
+    {
+        "data": "Gyro X: -0.01 | Gyro Y: -0.13 | Gyro Z: 0.12"
+    },
+    {
+        "data": "--------------------------------------"
+    },
+    {
+        "data": "Accel X: -0.40 | Accel Y: -8.98 | Accel Z: 3.42"
+    },
+    {
+        "data": "Gyro X: -0.05 | Gyro Y: -0.16 | Gyro Z: 0.15"
+    },
+    {
+        "data": "--------------------------------------"
+    },
+    {
+        "data": "Accel X: -0.28 | Accel Y: -9.09 | Accel Z: 3.26"
+    },
+    {
+        "data": "Gyro X: -0.04 | Gyro Y: -0.13 | Gyro Z: 0.12"
+    },
+    {
+        "data": "--------------------------------------"
+    },
+    {
+        "data": "Accel X: -0.11 | Accel Y: -9.10 | Accel Z: 3.43"
+    },
+    {
+        "data": "Gyro X: -0.03 | Gyro Y"
+    }
+]

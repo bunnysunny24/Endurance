@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Firebase credentials
+/backend/endurverse-firebase-adminsdk-fbsvc-1e9d7ba0c0.json
