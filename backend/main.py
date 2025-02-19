@@ -1,39 +1,29 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import json
-from firebase_config import db  # Import db from firebase_config.py
+from firebase_config import db  # Firebase Firestore connection
 
 app = FastAPI()
 
-# Path to your imu_data.json file
-json_file_path = "D:/Bunny/Endurase/backend/imu_data.json"
+# Define the expected data model
+class IMUData(BaseModel):
+    message: str
+    sensor: str
+    timestamp: int
 
 @app.post("/add-imu-data/")
-async def add_imu_data():
+async def add_imu_data(data: IMUData):
     try:
-        with open(json_file_path, 'r') as file:
-            imu_data = json.load(file)
-
-        print("Loaded JSON Data:", imu_data)
-
-        if not imu_data:
-            return {"error": "JSON file is empty"}
-
-        batch = db.batch()
+        print("Received Data:", data.dict())  # Debugging
         imu_collection = db.collection("imu_data")
-        document_refs = []
+        doc_ref = imu_collection.document()
+        doc_ref.set(data.dict())
 
-        for entry in imu_data:
-            if isinstance(entry, dict):
-                doc_ref = imu_collection.document()
-                batch.set(doc_ref, entry)
-                document_refs.append(doc_ref.id)
-
-        batch.commit()
-        return {"ids": document_refs}
+        return {"message": "Data added successfully", "id": doc_ref.id}
 
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get("/get-imu-data/{item_id}/")
 async def get_imu_data(item_id: str):
     try:
@@ -42,7 +32,7 @@ async def get_imu_data(item_id: str):
 
         if item.exists:
             return item.to_dict()
-        return {"error": "Item not found"}
-    
+        raise HTTPException(status_code=404, detail="Item not found")
+
     except Exception as e:
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
