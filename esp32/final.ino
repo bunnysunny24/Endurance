@@ -85,10 +85,10 @@ void loop() {
     float linAccY = accY - sin(angleY * PI / 180) * gravity;
     float linAccZ = accZ - cos(angleX * PI / 180) * gravity;
 
-    // Estimate velocity by integrating acceleration
-    velocityX += linAccX * dt;
-    velocityY += linAccY * dt;
-    velocityZ += linAccZ * dt;
+    // Thresholding to prevent drift in velocity
+    velocityX = (abs(linAccX) > 0.01) ? velocityX + linAccX * dt : 0;
+    velocityY = (abs(linAccY) > 0.01) ? velocityY + linAccY * dt : 0;
+    velocityZ = (abs(linAccZ) > 0.01) ? velocityZ + linAccZ * dt : 0;
 
     // Step detection
     if (abs(accZ - prevAccZ) > stepThreshold) {
@@ -109,55 +109,62 @@ void loop() {
     Serial.print(" | Steps: "); Serial.println(stepCount);
 
     // Send data to FastAPI server
-    sendToFastAPI(angleX, angleY, angleZ, velocityX, velocityY, velocityZ, stepCount);
+    sendToFastAPI(angleX, angleY, angleZ, velocityX, velocityY, velocityZ, linAccX, linAccY, linAccZ, stepCount);
 
     delay(1500);
 }
 
 // Function to send data to FastAPI
-void sendToFastAPI(float angleX, float angleY, float angleZ, float velocityX, float velocityY, float velocityZ, int steps) {
-    if (WiFi.status() == WL_CONNECTED) {
-        HTTPClient http;
-        Serial.println("🔍 Attempting to connect to: " + String(serverURL));
-
-        http.begin(serverURL);
-        http.addHeader("Content-Type", "application/json");
-
-        // Create JSON payload
-        StaticJsonDocument<200> doc;
-        doc["sensor"] = "IMU_1";
-        doc["timestamp"] = millis() / 1000;
-        doc["angleX"] = angleX;
-        doc["angleY"] = angleY;
-        doc["angleZ"] = angleZ;
-        doc["velocityX"] = velocityX;
-        doc["velocityY"] = velocityY;
-        doc["velocityZ"] = velocityZ;
-        doc["steps"] = steps;
-
-        String jsonPayload;
-        serializeJson(doc, jsonPayload);
-
-        Serial.println("📡 JSON Payload:");
-        Serial.println(jsonPayload);
-
-        int httpResponseCode = http.POST(jsonPayload);
-        String response = http.getString();
-
-        Serial.print("🔄 HTTP Response Code: ");
-        Serial.println(httpResponseCode);
-
-        if (httpResponseCode > 0) {
-            Serial.println("✅ Server Response:");
-            Serial.println(response);
-        } else {
-            Serial.print("❌ Error Sending Data: ");
-            Serial.println(httpResponseCode);
-        }
-
-        http.end();
-    } else {
-        Serial.println("🚨 WiFi Disconnected! Unable to send data.");
+void sendToFastAPI(float angleX, float angleY, float angleZ, float velocityX, float velocityY, float velocityZ, 
+                   float accelerationX, float accelerationY, float accelerationZ, int steps) {
+    if (WiFi.status() != WL_CONNECTED) {
+        Serial.println("🚨 WiFi Disconnected! Reconnecting...");
+        WiFi.disconnect();
+        WiFi.reconnect();
+        delay(1000);
+        return;
     }
-}
 
+    HTTPClient http;
+    Serial.println("🔍 Connecting to: " + String(serverURL));
+
+    http.begin(serverURL);
+    http.addHeader("Content-Type", "application/json");
+
+    // Create JSON payload
+    StaticJsonDocument<300> doc;
+    doc["sensor"] = "IMU_1";
+    doc["timestamp"] = millis() / 1000;
+    doc["angleX"] = angleX;
+    doc["angleY"] = angleY;
+    doc["angleZ"] = angleZ;
+    doc["velocityX"] = velocityX;
+    doc["velocityY"] = velocityY;
+    doc["velocityZ"] = velocityZ;
+    doc["accelerationX"] = accelerationX;  
+    doc["accelerationY"] = accelerationY;  
+    doc["accelerationZ"] = accelerationZ;  
+    doc["steps"] = steps;
+
+    String jsonPayload;
+    serializeJson(doc, jsonPayload);
+
+    Serial.println("📡 JSON Payload:");
+    Serial.println(jsonPayload);
+
+    int httpResponseCode = http.POST(jsonPayload);
+    String response = http.getString();
+
+    Serial.print("🔄 HTTP Response Code: ");
+    Serial.println(httpResponseCode);
+
+    if (httpResponseCode > 0) {
+        Serial.println("✅ Server Response:");
+        Serial.println(response);
+    } else {
+        Serial.print("❌ Error Sending Data: ");
+        Serial.println(httpResponseCode);
+    }
+
+    http.end();
+}
