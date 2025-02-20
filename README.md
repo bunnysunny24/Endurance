@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# 🚗 Endurance - IoT-Based Vehicle Monitoring System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Project Logo](assets/logo.png)
 
-## Available Scripts
+## 📌 Overview
+**Endurance** is a real-time **IoT-based vehicle monitoring system** that integrates **ESP32, Raspberry Pi, Firebase, FastAPI, Flask, and Machine Learning** to ensure vehicle safety and efficient monitoring.
 
-In the project directory, you can run:
+## 🔥 Features
+### 🚀 Real-Time Data Collection
+- **ESP32 + Gyro Sensor** collects **acceleration & velocity** data.
+- Data is stored in **Firebase** and processed using **FastAPI**.
 
-### `npm start`
+### 📊 Data Processing & Visualization
+- **FastAPI generates graphs** from raw sensor data (stored as bits).
+- **ML Model** calculates **average acceleration & velocity**.
+- **React UI + Flask** displays real-time **location tracking (latitude & longitude)**.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🚨 Speed & Acceleration Alerts
+- If high acceleration/velocity is detected, alerts are sent via **EmailJS / Twilio**.
+- Helps prevent **accidents by notifying drivers to slow down**.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🆘 Accident Detection & Emergency Alerts
+- **Raspberry Pi + Pressure Sensor** detects abnormal pressure.
+- **Emergency signal is sent** via **ESP32 WiFi**.
+- Nearby **hospitals, people, ambulances, and fire stations** receive alerts.
 
-### `npm test`
+## 🖼️ System Architecture
+![System Architecture](assets/system_architecture.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📸 Implementation Screenshots
+### 🔹 ESP32 + Gyro Sensor Data Logging
+![data1](https://github.com/user-attachments/assets/68505b7c-d11c-49f5-893e-0060870da7c1)
 
-### `npm run build`
+![data2](https://github.com/user-attachments/assets/62b5c172-f816-485b-9077-14f99ffeec46)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![data3](https://github.com/user-attachments/assets/041a5935-9e0b-48ca-b3e5-f50292a848f8)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🔹 Real-Time Dashboard
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🔹 Accident Detection System
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## 🛠️ Tech Stack
+| Component      | Technology |
+|---------------|-----------|
+| **Backend**   | FastAPI, Flask, Firebase |
+| **Frontend**  | React.js, Tailwind CSS |
+| **IoT Devices** | ESP32, Raspberry Pi, Gyro Sensor, Pressure Sensor |
+| **Alerts**    | Twilio, EmailJS |
+| **ML Model**  | Python, NumPy, SciPy |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🔧 Setup & Installation
+```sh
+# Clone the repository
+git clone https://github.com/bunnysunny24/Endurance.git
+cd Endurance
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Install backend dependencies
+pip install -r requirements.txt
 
-### Code Splitting
+# Install frontend dependencies
+cd frontend
+npm install
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Run FastAPI backend
+uvicorn backend.main:app --reload
 
-### Analyzing the Bundle Size
+# Run React frontend
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🚀 Future Enhancements
+- **AI-based predictive analytics** for accident prevention.
+- **Improved emergency response system** with geolocation tracking.
+- **Mobile App Integration** for instant alerts.
+- 
 
-### Making a Progressive Web App
+## 📝 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
