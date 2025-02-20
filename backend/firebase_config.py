@@ -3,7 +3,7 @@ from firebase_admin import credentials, firestore
 import json
 
 # Path to your service account JSON file
-cred_path = "D:\\Bunny\\Endurase\\backend\\endurance-d27e2-firebase-adminsdk-fbsvc-a1728e6e13.json"
+cred_path = r"D:\Bunny\Endurase\backend\endurverse-firebase-adminsdk-fbsvc-0dfe30353d.json"
 # Load the credentials from the JSON file
 with open(cred_path, 'r') as f:
     cred_data = json.load(f)
@@ -27,4 +27,6 @@ def test_firestore():
 
 # Run the test function
 if __name__ == "__main__":
+    test_firestore()
+in__":
     test_firestore()
