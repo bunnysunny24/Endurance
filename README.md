@@ -37,8 +37,23 @@
 
 
 ### 🔹 Real-Time Dashboard
+![board1](https://github.com/user-attachments/assets/d79fe7bb-121d-4e18-bb3b-2c1920e14e68)
 
+![board2](https://github.com/user-attachments/assets/34fd7123-083f-4f00-8d31-65b44994f746)
 
+![board4](https://github.com/user-attachments/assets/eb1daa28-e418-4615-9e3d-2d29d7e0a213)
+
+![board3](https://github.com/user-attachments/assets/ea00d10b-3c32-4ce4-b8c1-c5b9e4d5e082)
+
+![board5](https://github.com/user-attachments/assets/58164e0f-c30d-42c6-9204-6a426bf3ef8c)
+
+![board6](https://github.com/user-attachments/assets/848659dc-a714-43df-a851-62607d69e8e8)
+
+![board7](https://github.com/user-attachments/assets/2beda9e8-a2ee-4009-94b0-1575235e4946)
+
+![board8](https://github.com/user-attachments/assets/65bd664d-badc-4174-9c6c-586d83a6c21a)
+
+![board9](https://github.com/user-attachments/assets/06c9e640-611b-4a15-9176-af4df7c9296a)
 
 ### 🔹 Accident Detection System
 
