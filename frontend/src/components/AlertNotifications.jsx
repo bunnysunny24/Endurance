@@ -69,3 +69,26 @@ const AlertNotifications = ({ alerts }) => {
 };
 
 export default AlertNotifications;
+import React from "react";
+import { AlertTriangle } from "lucide-react";
+
+const AlertNotifications = ({ alerts }) => {
+  return (
+    <div className="bg-gray-800 p-4 rounded-lg shadow-lg">
+      <h2 className="text-xl font-semibold mb-2 flex items-center">
+        <AlertTriangle className="text-yellow-400 mr-2" /> Alerts
+      </h2>
+      {alerts.length === 0 ? (
+        <p className="text-gray-400">No alerts</p>
+      ) : (
+        <ul className="text-red-400">
+          {alerts.map((alert, index) => (
+            <li key={index}>{alert}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+export default AlertNotifications;
