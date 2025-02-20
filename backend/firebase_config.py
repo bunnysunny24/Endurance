@@ -3,8 +3,7 @@ from firebase_admin import credentials, firestore
 import json
 
 # Path to your service account JSON file
-cred_path = "D:/Bunny/Endurase/backend/endurverse-firebase-adminsdk-fbsvc-1e9d7ba0c0.json"
-
+cred_path = "D:\\Bunny\\Endurase\\backend\\endurance-d27e2-firebase-adminsdk-fbsvc-a1728e6e13.json"
 # Load the credentials from the JSON file
 with open(cred_path, 'r') as f:
     cred_data = json.load(f)
